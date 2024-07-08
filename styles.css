@@ -3,3 +3,11 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.container-main {
+    display: flex;
+}
+
+.line-through {
+    text-decoration: line-through;
+}

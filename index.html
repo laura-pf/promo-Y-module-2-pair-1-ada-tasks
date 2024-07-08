@@ -7,6 +7,29 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+    <header> <h1>AdaTask</h1></header>
+
+    <main class="container-main">
+
+        <section class="section1">
+            <form action="">
+                <label for="addTask"></label>
+                <input type="text" name="search" id="addTask" placeholder="Nueva tarea">
+                <button type="submit">Agregar</button>
+            </form>
+        </section>
+
+        <section class="section2">
+            <form action="">
+                <label for="search"></label>
+                    <div class="div-search">
+                        <input type="text" name="search" id="search" placeholder="Ejemplo: gim">
+                        <button type="submit">Buscar</button>
+                    </div>
+                <ul class="js-taskList"></ul>
+            </form>
+        </section>
+    </main>
 
 
     <script src="./main.js"></script>
