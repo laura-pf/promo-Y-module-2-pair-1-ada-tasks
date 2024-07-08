@@ -11,13 +11,17 @@ const tasks = [
 ];
 
 for(const task of tasks){
-    taskList.innerHTML += `
-        <li>${task.name}</li>`;
+    // taskList.innerHTML += `
+    //     <li>${task.name}</li>`;
 
-    if (task.completed == true){
-        taskList.innerHTML += `
-        <li class="line-through">${task.name}</li>`
+    if (task.completed === true){
+      taskList.innerHTML += `
+      <li class="line-through">${task.name}</li>`
 
+     } else {
+      taskList.innerHTML += `
+        <li>${task.name}</li>`
+      
      }
 };
 
