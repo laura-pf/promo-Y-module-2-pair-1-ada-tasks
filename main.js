@@ -11,8 +11,6 @@ const tasks = [
 ];
 
 // for(const task of tasks){
-//     // taskList.innerHTML += `
-//     //     <li>${task.name}</li>`;
 
 //     if (task.completed === true){
 //       taskList.innerHTML += `
@@ -23,5 +21,5 @@ const tasks = [
 //         <li class="border-li">${task.name}</li>`
       
 //      }
-};
+// };
 
