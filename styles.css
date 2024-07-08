@@ -43,7 +43,7 @@
     
 }
 
-.form__addTask{
+.form__addTask {
     display: flex;
     flex-direction: column;
     background-color: rgb(255, 255, 255);
@@ -51,9 +51,7 @@
     padding-top: 10px;
     padding-left: 30px;
     padding-bottom: 30px;
-    padding-right: 30px;
-    
-    
+    padding-right: 30px; 
     
 }
 
@@ -63,8 +61,6 @@
     background-color: rgb(252, 251, 255);
     padding: 30px;
     gap: 20px;
-    
-   
 }
 
 .button {
@@ -79,6 +75,10 @@
 .input{
     padding: 7.4px;
     border-radius: 4px;
+}
+
+.input-search {
+    flex-grow: 2;
 }
 
 .div-search {
