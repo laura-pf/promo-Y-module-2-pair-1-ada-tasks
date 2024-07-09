@@ -30,10 +30,14 @@ function renderTasks () {
 
 function handleClick(event) {
   if (event.target.type === 'checkbox') {
-    const taskId = parseInt(event.target.id);
-    const task = tasks.find(task => task.id === taskId);
+    const taskIdCheckbox = parseInt(event.target.id);
+    const task = tasks.find(task => {
+      // console.log("taskIdCheckbox", taskIdCheckbox);
+      // console.log("task.id", task.id)
+      return task.id === taskIdCheckbox
+    });
     task.completed = event.target.checked;
-    event.target.parentElement.classList.toggle('line-through', task.completed);
+    renderTasks();
   }
 };
 
