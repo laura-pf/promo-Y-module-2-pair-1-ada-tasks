@@ -12,6 +12,7 @@ const tasks = [
 
 
 function renderTasks () {
+  taskList.innerHTML = '';
   for(const task of tasks){
 
     if (task.completed === true){
@@ -27,13 +28,15 @@ function renderTasks () {
 }
 };
 
-renderTasks();
-
-
-function handleClick (event) {
-  
-
+function handleClick(event) {
+  if (event.target.type === 'checkbox') {
+    const taskId = parseInt(event.target.id);
+    const task = tasks.find(task => task.id === taskId);
+    task.completed = event.target.checked;
+    event.target.parentElement.classList.toggle('line-through', task.completed);
+  }
 };
 
 taskList.addEventListener("click", handleClick);
 
+renderTasks();
