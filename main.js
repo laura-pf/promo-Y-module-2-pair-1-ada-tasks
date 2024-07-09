@@ -16,12 +16,12 @@ function renderTasks () {
   for(const task of tasks){
 
     if (task.completed === true){
-      taskList.innerHTML += ` <li class="border-li line-through"><input type="checkbox" checked id="${task.id}"> <span>
+      taskList.innerHTML += ` <li class="border-li line-through list-dec"><input type="checkbox" checked id="${task.id}"> <span>
       ${task.name} </span> </li> `;
 
 
      } else {
-      taskList.innerHTML += `<li class="border-li"> <input type="checkbox" id="${task.id}"> <span> 
+      taskList.innerHTML += `<li class="border-li list-dec"> <input type="checkbox" id="${task.id}"> <span> 
       ${task.name} </span> </li>`
       
      }

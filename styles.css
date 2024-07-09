@@ -95,4 +95,8 @@
     flex-direction: column;
     gap: 20px;
     list-style-type: none;
-};
+}
+
+.list-dec {
+   list-style-type: none;
+}
