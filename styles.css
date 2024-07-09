@@ -32,7 +32,6 @@
 }
 
 .border-li {
-    border: 1px solid rgb(228, 227, 224);
     padding: 10px;
     border-radius: 4px;
 }
@@ -94,9 +93,13 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    list-style-type: none;
+   
 }
 
 .list-dec {
    list-style-type: none;
+}
+
+.container-list {
+    background-color: rgb(255, 255, 255);
 }
