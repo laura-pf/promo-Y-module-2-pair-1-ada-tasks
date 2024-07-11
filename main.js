@@ -29,15 +29,16 @@ function renderTasks () {
 }
 };
 
+//cuando la usuaria haga click en la tarea, se marca el check y se tacha la tarea
 function handleClick(event) {
   if (event.target.type === 'checkbox') {
     const taskIdCheckbox = parseInt(event.target.id);
     const task = tasks.find(task => {
       // console.log("taskIdCheckbox", taskIdCheckbox);
       // console.log("task.id", task.id)
-      return task.id === taskIdCheckbox
+      return task.id === taskIdCheckbox //la tarea que ha seleccionado la usuaria, coincida con el id de la tarea
     });
-    task.completed = event.target.checked;
+    task.completed = event.target.checked; //
     renderTasks();
   }
 };
