@@ -1,6 +1,8 @@
 'use strict';
 
 const taskList = document.querySelector(".js-taskList");
+const inputAdd = document.querySelector(".js-inputAdd");
+const buttonAdd = document.querySelector(".js-buttonAdd");
 let tasks = []; //declaramos variable global de array vacio que se actualiza en el fetch, porque es igual a data.results para poder acceder a la lista de tareas en la funcion manejadora.
 
 
@@ -12,7 +14,11 @@ let tasks = []; //declaramos variable global de array vacio que se actualiza en 
 // ];
 
 
-function renderTasks () {
+
+
+
+
+function renderTasks() {
   taskList.innerHTML = '';
   for(const task of tasks){
 
@@ -28,6 +34,42 @@ function renderTasks () {
      }
 }
 };
+
+
+
+const tasksLocalStorage = JSON.parse(localStorage.getItem("listTasks"));
+console.log (tasksLocalStorage);
+
+
+// ejercicio: cuando escribo una nueva tarea, se añade a la lista.
+const handleNewTask = (event) => {
+  event.preventDefault();
+  const inputAddValue = inputAdd.value;
+
+  const newTask = {
+    name: inputAddValue,
+    completed: false,
+    id: tasks.length + 1,
+  }
+
+  
+
+  tasks.push(newTask);
+  
+  renderTasks();
+
+  if (tasksLocalStorage !== null) {
+  renderTasks()
+} else {
+
+}
+
+
+
+
+}
+
+buttonAdd.addEventListener("click", handleNewTask)
 
 //cuando la usuaria haga click en la tarea, se marca el check y se tacha la tarea
 function handleClick(event) {
@@ -58,10 +100,12 @@ fetch(SERVER_URL)
 .then(data => { 
   const list = data.results;
   tasks = list;
-
-  renderTasks();
-  
+  localStorage.setItem("listTasks", JSON.stringify(tasks))
+  renderTasks(); 
   
 })
+
+
+
  
 
