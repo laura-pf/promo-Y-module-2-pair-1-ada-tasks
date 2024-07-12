@@ -3,7 +3,11 @@
 const taskList = document.querySelector(".js-taskList");
 const inputAdd = document.querySelector(".js-inputAdd");
 const buttonAdd = document.querySelector(".js-buttonAdd");
+
 let tasks = []; //declaramos variable global de array vacio que se actualiza en el fetch, porque es igual a data.results para poder acceder a la lista de tareas en la funcion manejadora.
+
+
+
 
 
 // const tasks = [
@@ -21,18 +25,31 @@ let tasks = []; //declaramos variable global de array vacio que se actualiza en 
 function renderTasks() {
   taskList.innerHTML = '';
   for(const task of tasks){
+  
+    const itemList = document.createElement("li");
+    const inputList = document.createElement("input");
+    const taskName = document.createElement("span");
+    taskList.appendChild(itemList);
+    itemList.appendChild(inputList);
+    const taskNameMessage = document.createTextNode(task.name);
+    taskName.appendChild(taskNameMessage);
+    itemList.appendChild(taskName); 
+    inputList.setAttribute("type", "checkbox");
+    inputList.setAttribute("id", task.id);
 
+    
     if (task.completed === true){
-      taskList.innerHTML += ` <li class="border-li line-through list-dec"><input type="checkbox" checked id="${task.id}"> <span>
-      ${task.name} </span> </li> `;
 
-
-     } else {
-      taskList.innerHTML += `<li class="border-li list-dec"> <input type="checkbox" id="${task.id}"> <span>
-      ${task.name} </span> </li>`
+ 
+      itemList.setAttribute("class", "border-li line-through list-dec");
+      inputList.setAttribute("checked", "");
+  
+  }else{ 
+    
+      itemList.setAttribute("class", "border-li list-dec")
 
      }
-}
+  }
 };
 
 
@@ -63,9 +80,6 @@ const handleNewTask = (event) => {
 } else {
 
 }
-
-
-
 
 }
 
