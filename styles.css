@@ -25,6 +25,7 @@
     gap: 100px;
     justify-content: center;
     align-items: flex-start;
+
 }
  /*clase tachar texto para js*/
 .line-through {
@@ -34,6 +35,8 @@
 .border-li {
     padding: 10px;
     border-radius: 4px;
+    border: 1px solid rgb(212, 207, 207);
+    margin-bottom: 15px;
 }
 
 .section {
@@ -90,16 +93,24 @@
 
 .list {
     font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-   
+    font-size: 12px;
+ 
 }
 
 .list-dec {
    list-style-type: none;
+   margin-right: 5px;
 }
 
 .container-list {
     background-color: rgb(255, 255, 255);
+}
+
+.section2 {
+    padding: 0 20px 15px 20px;
+    background-color: rgb(255, 255, 255);
+}
+
+.inputMargin {
+    margin-right: 10px;
 }

@@ -6,27 +6,13 @@ const buttonAdd = document.querySelector(".js-buttonAdd");
 const buttonSearch = document.querySelector(".js-buttonSearch");
 const inputSearch = document.querySelector(".js-inputSearch");
 let tasks = []; //declaramos variable global de array vacio que se actualiza en el fetch, porque es igual a data.results para poder acceder a la lista de tareas en la funcion manejadora.
+const SERVER_URL = `https://dev.adalab.es/api/todo/`;
 
-
-
-
-
-// const tasks = [
-//   { name: "Recoger setas en el campo", completed: true, id: 1 },
-//   { name: "Comprar pilas", completed: true, id: 2 },
-//   { name: "Poner una lavadora de blancos", completed: true, id: 3 },
-//   { name: "Aprender cómo se realizan las peticiones al servidor en JavaScript", completed: false, id: 4,},
-// ];
-
-
-
-
-
-
+//funcion que renderiza las tareas
 function renderTasks(arrayTasks) {
   taskList.innerHTML = '';
   for(const task of arrayTasks){
-  
+
     const itemList = document.createElement("li");
     const inputList = document.createElement("input");
     const taskName = document.createElement("span");
@@ -34,44 +20,43 @@ function renderTasks(arrayTasks) {
     itemList.appendChild(inputList);
     const taskNameMessage = document.createTextNode(task.name);
     taskName.appendChild(taskNameMessage);
-    itemList.appendChild(taskName); 
+    itemList.appendChild(taskName);
     inputList.setAttribute("type", "checkbox");
     inputList.setAttribute("id", task.id);
 
-    
     if (task.completed === true){
 
- 
-      itemList.setAttribute("class", "border-li line-through list-dec");
+      itemList.setAttribute("class", "border-li line-through list-dec list");
       inputList.setAttribute("checked", "");
-  
-  }else{ 
-    
-      itemList.setAttribute("class", "border-li list-dec")
+      inputList.setAttribute("class", "inputMargin")
+
+  }else{
+
+      itemList.setAttribute("class", "border-li list-dec list")
+      inputList.setAttribute("class", "inputMargin")
 
      }
   }
 };
 
+renderTasks(tasks);
 
-
+// petición al servidor, y almacenamiento del local storage
 const tasksLocalStorage = JSON.parse(localStorage.getItem("listTasks"));
-// console.log (tasksLocalStorage);
   if (tasksLocalStorage) {
-  renderTasks(tasksLocalStorage)
+    tasks = tasksLocalStorage
+    renderTasks(tasksLocalStorage)
 } else {
     fetch(SERVER_URL)
   .then(response => response.json())
-  .then(data => { 
+  .then(data => {
     const list = data.results;
     tasks = list;
     localStorage.setItem("listTasks", JSON.stringify(tasks))
-    renderTasks(tasks); 
-    
+    renderTasks(tasks);
+
   })
 }
-
-
 
 // ejercicio: cuando escribo una nueva tarea, se añade a la lista.
 const handleNewTask = (event) => {
@@ -83,17 +68,11 @@ const handleNewTask = (event) => {
     completed: false,
     id: tasks.length + 1,
   }
-
-  
-
   tasks.push(newTask);
-  
   renderTasks(tasks);
 
-
 }
-
-
+ 
 
 buttonAdd.addEventListener("click", handleNewTask);
 
@@ -101,7 +80,8 @@ function handleSearchTask (event) {
   event.preventDefault()
   const valueSearch = inputSearch.value;
 
-  const filterTasks = tasks.filter((task) => task.name.includes(valueSearch)) 
+  const filterTasks = tasks.filter((task) => task.name.includes(valueSearch));
+  renderTasks(filterTasks);
 
 }
 
@@ -123,17 +103,13 @@ function handleClick(event) {
 
 taskList.addEventListener("click", handleClick);
 
-// renderTasks();
-
-//TAREA PETICIONES AL SERVIDOR
-
-// const GITHUB_USER = "laura-pf";
-const SERVER_URL = `https://dev.adalab.es/api/todo/`;
 
 
 
 
 
 
- 
+
+
+
 
