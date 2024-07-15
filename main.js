@@ -3,6 +3,8 @@
 const taskList = document.querySelector(".js-taskList");
 const inputAdd = document.querySelector(".js-inputAdd");
 const buttonAdd = document.querySelector(".js-buttonAdd");
+const buttonSearch = document.querySelector(".js-buttonSearch");
+const inputSearch = document.querySelector(".js-inputSearch");
 let tasks = []; //declaramos variable global de array vacio que se actualiza en el fetch, porque es igual a data.results para poder acceder a la lista de tareas en la funcion manejadora.
 
 
@@ -18,9 +20,9 @@ let tasks = []; //declaramos variable global de array vacio que se actualiza en 
 
 
 
-function renderTasks() {
+function renderTasks(arrayTasks) {
   taskList.innerHTML = '';
-  for(const task of tasks){
+  for(const task of arrayTasks){
 
     if (task.completed === true){
       taskList.innerHTML += ` <li class="border-li line-through list-dec"><input type="checkbox" checked id="${task.id}"> <span>
@@ -38,7 +40,21 @@ function renderTasks() {
 
 
 const tasksLocalStorage = JSON.parse(localStorage.getItem("listTasks"));
-console.log (tasksLocalStorage);
+// console.log (tasksLocalStorage);
+  if (tasksLocalStorage) {
+  renderTasks(tasksLocalStorage)
+} else {
+    fetch(SERVER_URL)
+  .then(response => response.json())
+  .then(data => { 
+    const list = data.results;
+    tasks = list;
+    localStorage.setItem("listTasks", JSON.stringify(tasks))
+    renderTasks(tasks); 
+    
+  })
+}
+
 
 
 // ejercicio: cuando escribo una nueva tarea, se añade a la lista.
@@ -56,20 +72,24 @@ const handleNewTask = (event) => {
 
   tasks.push(newTask);
   
-  renderTasks();
-
-  if (tasksLocalStorage !== null) {
-  renderTasks()
-} else {
-
-}
-
-
+  renderTasks(tasks);
 
 
 }
 
-buttonAdd.addEventListener("click", handleNewTask)
+
+
+buttonAdd.addEventListener("click", handleNewTask);
+
+function handleSearchTask (event) {
+  event.preventDefault()
+  const valueSearch = inputSearch.value;
+
+  const filterTasks = tasks.filter((task) => task.name.includes(valueSearch)) 
+
+}
+
+buttonSearch.addEventListener("click", handleSearchTask);
 
 //cuando la usuaria haga click en la tarea, se marca el check y se tacha la tarea
 function handleClick(event) {
@@ -81,7 +101,7 @@ function handleClick(event) {
       return task.id === taskIdCheckbox //la tarea que ha seleccionado la usuaria, coincida con el id de la tarea
     });
     task.completed = event.target.checked; //
-    renderTasks();
+    renderTasks(tasks);
   }
 };
 
@@ -95,15 +115,7 @@ taskList.addEventListener("click", handleClick);
 const SERVER_URL = `https://dev.adalab.es/api/todo/`;
 
 
-fetch(SERVER_URL)
-.then(response => response.json())
-.then(data => { 
-  const list = data.results;
-  tasks = list;
-  localStorage.setItem("listTasks", JSON.stringify(tasks))
-  renderTasks(); 
-  
-})
+
 
 
 
