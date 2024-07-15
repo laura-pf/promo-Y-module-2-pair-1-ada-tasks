@@ -76,6 +76,8 @@ const handleNewTask = (event) => {
 
 buttonAdd.addEventListener("click", handleNewTask);
 
+//filtrar tareas en el buscador de tareas
+
 function handleSearchTask (event) {
   event.preventDefault()
   const valueSearch = inputSearch.value;
