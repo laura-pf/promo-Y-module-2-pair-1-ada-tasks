@@ -8,6 +8,9 @@ const inputSearch = document.querySelector(".js-inputSearch");
 let tasks = []; //declaramos variable global de array vacio que se actualiza en el fetch, porque es igual a data.results para poder acceder a la lista de tareas en la funcion manejadora.
 
 
+
+
+
 // const tasks = [
 //   { name: "Recoger setas en el campo", completed: true, id: 1 },
 //   { name: "Comprar pilas", completed: true, id: 2 },
@@ -23,18 +26,31 @@ let tasks = []; //declaramos variable global de array vacio que se actualiza en 
 function renderTasks(arrayTasks) {
   taskList.innerHTML = '';
   for(const task of arrayTasks){
+  
+    const itemList = document.createElement("li");
+    const inputList = document.createElement("input");
+    const taskName = document.createElement("span");
+    taskList.appendChild(itemList);
+    itemList.appendChild(inputList);
+    const taskNameMessage = document.createTextNode(task.name);
+    taskName.appendChild(taskNameMessage);
+    itemList.appendChild(taskName); 
+    inputList.setAttribute("type", "checkbox");
+    inputList.setAttribute("id", task.id);
 
+    
     if (task.completed === true){
-      taskList.innerHTML += ` <li class="border-li line-through list-dec"><input type="checkbox" checked id="${task.id}"> <span>
-      ${task.name} </span> </li> `;
 
-
-     } else {
-      taskList.innerHTML += `<li class="border-li list-dec"> <input type="checkbox" id="${task.id}"> <span>
-      ${task.name} </span> </li>`
+ 
+      itemList.setAttribute("class", "border-li line-through list-dec");
+      inputList.setAttribute("checked", "");
+  
+  }else{ 
+    
+      itemList.setAttribute("class", "border-li list-dec")
 
      }
-}
+  }
 };
 
 
